@@ -9,8 +9,6 @@ const port = process.env.PORT;
 app.use(express.json());
 app.use(userRouter);
 
-
-
 app.listen(port, () => {
     console.log('Server is up and running on port ' + port);
 });
