@@ -7,16 +7,20 @@ const bookSchema = new mongoose.Schema({
     },
     likes: {
         type: Number,
-        default: 0,
-        required: true
-    },
-    isbn: {
-        type: Number,
-        required: true
+        default: 0
     },
     author: {
         type: String,
         required: true
+    },
+    isBn: {
+        type: Number,
+        required: true
+    },
+    readTill: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
+        default: 0
     }
 });
 
