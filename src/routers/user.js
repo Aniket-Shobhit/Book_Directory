@@ -52,9 +52,5 @@ router.get('/users/me', auth, async (req,res) => {
     res.send(req.user);
 });
 
-router.get('/users/likedBooks', auth, async (req,res) => {
-    
-});
-
 
 module.exports = router;

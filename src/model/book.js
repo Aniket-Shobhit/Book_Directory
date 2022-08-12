@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+
 const bookSchema = new mongoose.Schema({
     title: {
         type: String,
@@ -15,13 +16,9 @@ const bookSchema = new mongoose.Schema({
     },
     isBn: {
         type: Number,
-        required: true
-    },
-    // readTill: {
-    //     type: mongoose.Schema.Types.ObjectId,
-    //     ref: 'User',
-    //     default: 0
-    // }
+        required: true,
+        unique: true
+    }
 });
 
 bookSchema.virtual('usersLiked', {

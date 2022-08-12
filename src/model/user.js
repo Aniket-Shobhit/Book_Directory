@@ -45,16 +45,13 @@ const userSchema = new mongoose.Schema({
     likedBooks: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Book'
-    }],
-    // avatar: {
-    //     type: Buffer
-    // }
+    }]
 });
 
 userSchema.methods.toJSON = function() {
     const user = this;
     const userObject = user.toObject();
-    delete userObject.password;
+    // delete userObject.password;
     delete userObject.tokens;
     return userObject;
 }
@@ -73,12 +70,23 @@ userSchema.statics.findByCredentials = async (email,password) => {
     if(!user) {
         throw new Error('Unable to login');
     }
-    const isValid = user.password === password;
+    const isValid = await bcrypt.compare(password,user.password);
     if(!isValid) {
         throw new Error('Unable to login!');
     }
     return user;
 }
+
+userSchema.pre('save', async function(next) {
+    const user = this;
+
+    if(user.isModified('password')) {
+        console.log(user.password);
+        user.password = await bcrypt.hash(user.password,8);
+        console.log(user.password);
+    }
+    next();
+});
 
 const User = mongoose.model('User', userSchema);
 
