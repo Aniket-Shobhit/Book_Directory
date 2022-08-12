@@ -17,11 +17,11 @@ const bookSchema = new mongoose.Schema({
         type: Number,
         required: true
     },
-    readTill: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'User',
-        default: 0
-    }
+    // readTill: {
+    //     type: mongoose.Schema.Types.ObjectId,
+    //     ref: 'User',
+    //     default: 0
+    // }
 });
 
 bookSchema.virtual('usersLiked', {
